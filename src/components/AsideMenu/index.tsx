@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import {
+  MdFactCheck,
   MdGroup,
   MdLockPerson,
   MdLogout,
@@ -31,6 +32,11 @@ export default ({ isMenuOpen }: MenuAsideProps) => {
       href: "/home",
       title: "Dashboard",
       icon: <MdPieChart className="w-6 h-6 custom--svg" />,
+    },
+    {
+      href: "/point",
+      title: "Check Point",
+      icon: <MdFactCheck className="w-6 h-6 custom--svg" />,
     },
     {
       href: "/user",

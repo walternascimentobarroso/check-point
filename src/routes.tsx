@@ -8,7 +8,7 @@ import HomePage from "./pages/Home/Page";
 import ProfilePage from "./pages/Profile/Page";
 import Error404Page from "./pages/Error/404Page";
 import ComponentPage from "./pages/Component/Page";
-
+import CheckPointPage from "./pages/CheckPoint/Page";
 // Auth Pages
 import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
@@ -33,6 +33,11 @@ const routes: any[] = [
     path: "/profile",
     exact: true,
     element: <Private Item={ProfilePage} />,
+  },
+  {
+    path: "/point",
+    exact: true,
+    element: <Private Item={CheckPointPage} />,
   },
   {
     path: "/user",
