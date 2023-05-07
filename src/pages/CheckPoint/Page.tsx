@@ -6,6 +6,9 @@ import Clock from "../../components/Clock";
 import Button from "../../components/Button";
 
 export default () => {
+  const startTime = "00:00:00";
+  const endTime = "??:??:??";
+
   const history = [
     {
       date: "01/05/2023",
@@ -25,7 +28,7 @@ export default () => {
     {
       date: "04/05/2023",
       percentage: "100",
-      hours: "8:00",
+      hours: "0:05",
     },
   ];
   return (
@@ -49,8 +52,8 @@ export default () => {
         <Clock />
         <div>
           <div className="flex justify-between">
-            <strong>12:32:11</strong>
-            <strong>??:??:??</strong>
+            <strong>{startTime}</strong>
+            <strong>{endTime}</strong>
           </div>
           <span className="block rounded-full bg-gray-200 dark:bg-gray-700">
             <span
@@ -81,7 +84,7 @@ export default () => {
                 />
               </span>
             </div>
-            <strong>{item.hours} horas</strong>
+            <strong>{("00:00" + item.hours).slice(-5)} horas</strong>
           </div>
         ))}
       </Card>
