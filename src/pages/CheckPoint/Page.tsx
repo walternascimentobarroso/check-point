@@ -1,13 +1,46 @@
+import { useState } from "react";
 import Card from "../../components/Card";
+import Clock from "../../components/Clock";
 import Title from "../../components/Title";
+import Button from "../../components/Button";
 import Template from "../../components/Template";
 import Breadcrumb from "../../components/Breadcrumb";
-import Clock from "../../components/Clock";
-import Button from "../../components/Button";
 
 export default () => {
-  const startTime = "00:00:00";
-  const endTime = "??:??:??";
+  const [startTime, setStartTime]: any = useState("00:00:00");
+  const [endTime, setEndTime]: any = useState("??:??:??");
+  const [endTimeDate, setEndTimeDate]: any = useState();
+
+  const [blockButtons, setBlockButtons] = useState(false);
+  const [breakButtons, setBreakButtons] = useState(true);
+  const [breakTime, setBreakTime]: any = useState();
+
+  const initTime = () => {
+    setBlockButtons(true);
+
+    const time = new Date();
+
+    setStartTime(time.toLocaleTimeString());
+    time.setHours(time.getHours() + 8);
+    setEndTime(time.toLocaleTimeString());
+    setEndTimeDate(time);
+  };
+
+  const initBreak = () => {
+    setBreakButtons(false);
+    setEndTime("??:??:??");
+    setBreakTime(new Date());
+  };
+
+  const handleBack = () => {
+    setBreakButtons(true);
+    const time = new Date();
+
+    const diff = time.getTime() - breakTime.getTime();
+    endTimeDate.setTime(endTimeDate.getTime() + diff);
+    setEndTime(endTimeDate.toLocaleTimeString());
+    setEndTimeDate(endTimeDate);
+  };
 
   const history = [
     {
@@ -63,10 +96,18 @@ export default () => {
           </span>
         </div>
         <div className="flex justify-between my-4">
-          <Button>Start</Button>
-          <Button>Break</Button>
-          <Button>Lunch</Button>
-          <Button>Achievement</Button>
+          <Button disabled={blockButtons} onClick={initTime}>
+            Start
+          </Button>
+          {breakButtons ? (
+            <>
+              <Button onClick={initBreak}>Break</Button>
+              <Button onClick={initBreak}>Lunch</Button>
+            </>
+          ) : (
+            <Button onClick={handleBack}>Back</Button>
+          )}
+          <Button disabled={!blockButtons}>Achievement</Button>
         </div>
       </Card>
 
